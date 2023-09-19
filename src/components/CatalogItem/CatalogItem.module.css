@@ -1,0 +1,68 @@
+.itemContainer {
+  width: 274px;
+}
+.imgBox {
+  position: relative;
+  height: 268px;
+}
+.img {
+  width: 100%;
+  height: 268px;
+  border-radius: 14px;
+}
+.iconBtn {
+  background-color: inherit;
+}
+/* .fiilIcon {
+} */
+.icon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+.infoBox {
+  margin: 14px 0 28px;
+}
+.titleBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 16px;
+
+  font-weight: 500;
+  line-height: 24px;
+
+  margin-bottom: 8px;
+}
+
+.span {
+  color: var(--accent-color);
+}
+.price {
+  margin-right: 10px;
+}
+.list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.item {
+  color: var(--bg-modal-grey);
+  font-size: 12px;
+  line-height: 18px;
+}
+.line::before {
+  content: "|";
+  margin: 0 6px;
+  color: var(--bg-modal-grey);
+}
+.btn {
+  width: 100%;
+  background-color: var(--accent-color);
+  border-radius: 12px;
+
+  color: var(--white-color);
+  font-weight: 600;
+  line-height: 20px;
+  padding: 12px 0;
+}

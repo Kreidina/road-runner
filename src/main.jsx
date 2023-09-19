@@ -5,14 +5,15 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
+
 import App from "./App.jsx";
 import "./index.css";
 
-import { lazy } from "react";
 import Layout from "./components/Layout/Layout";
-const Home = lazy(() => import("./pages/Home"));
-const Catalog = lazy(() => import("./pages/Catalog"));
-const Favorite = lazy(() => import("./pages/Favorite"));
+import Home from "./pages/Home.jsx";
+import Catalog from "./pages/Catalog.jsx";
+import Favorite from "./pages/Favorite.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/road-runner/",

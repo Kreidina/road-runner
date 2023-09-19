@@ -1,0 +1,48 @@
+.img {
+  width: 461px;
+  height: 248px;
+  border-radius: 14px;
+}
+.infoBox {
+  width: 300px;
+  margin-top: 14px;
+}
+.title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  margin-bottom: 8px;
+}
+
+.span {
+  color: var(--accent-color);
+}
+.price {
+  margin-right: 10px;
+}
+.list {
+  display: flex;
+  height: 40px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  row-gap: 4px;
+}
+.item {
+  color: var(--bg-modal-grey);
+  font-size: 12px;
+  line-height: 18px;
+}
+.line::before {
+  content: "|";
+  margin: 0 4px;
+  color: var(--bg-modal-grey);
+}
+.description {
+  line-height: 20px;
+  margin: 14px 0 24px;
+}
+.accessoriesList {
+  display: flex;
+  flex-wrap: wrap;
+}
