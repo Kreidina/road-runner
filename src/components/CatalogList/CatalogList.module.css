@@ -28,3 +28,11 @@
 .marg {
   margin-top: 50px;
 }
+.nothingBox {
+  background-color: rgba(212, 214, 218, 0.1);
+  border-radius: 10px;
+}
+.nothingTitle {
+  text-align: center;
+  padding: 30px 0;
+}

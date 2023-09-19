@@ -1,10 +1,12 @@
-import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import CatalogItem from "../CatalogItem/CatalogItem";
 import css from "./CatalogList.module.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Button from "../Button";
+import { selectAdverts } from "../../redux/advetrs/selectors";
+import { Location } from "../../helpers/func";
 
 const initialValues = {
   selectBrand: "",
@@ -12,10 +14,15 @@ const initialValues = {
   mileage: { from: "", to: "" },
 };
 
-const CatalogList = ({ adverts }) => {
+const CatalogList = () => {
   const [visible, setVisible] = useState(8);
   const [currentPage, setCurrentPage] = useState(1);
   const [dataValues, setDataValues] = useState(initialValues);
+  const [nothing, setNothing] = useState(false);
+  const adverts = useSelector(selectAdverts);
+  // const isLoading = useSelector(selectIsLoading);
+  // console.log(isLoading);
+  const location = Location();
 
   const handelMore = () => {
     setVisible(visible + 8);
@@ -70,19 +77,40 @@ const CatalogList = ({ adverts }) => {
 
     return filteredAdverts;
   };
-
   const filter = filterAdverts();
+
+  useEffect(() => {
+    const { selectBrand, selectPrice, mileage } = dataValues;
+    const { from, to } = mileage;
+    if (
+      (filter.length === 0 && selectBrand !== "") ||
+      (filter.length === 0 && selectPrice !== "") ||
+      (filter.length === 0 && from !== "") ||
+      (filter.length === 0 && to !== "")
+    ) {
+      setNothing(true);
+    }
+  }, [dataValues, filter]);
+
+  const favorite = adverts.filter((advert) => advert.favorite === true);
+
   // console.log(filter);
+  // console.log(favorite);
+
   return (
     <>
       <div className={css.container}>
-        <Sidebar onSubmitData={onSubmit} />
-        {filter.length > 0 ? (
+        <Sidebar onSubmitData={onSubmit} setNothing={setNothing} />
+        {!nothing ? (
           <>
             <ul className={css.list}>
-              {filter.slice(0, visible).map((car) => (
-                <CatalogItem key={car.id} car={car} />
-              ))}
+              {location === "/road-runner/favorites"
+                ? favorite
+                    .slice(0, visible)
+                    .map((car) => <CatalogItem key={car.id} car={car} />)
+                : filter
+                    .slice(0, visible)
+                    .map((car) => <CatalogItem key={car.id} car={car} />)}
             </ul>
 
             {visible < filter.length ? (
@@ -94,7 +122,11 @@ const CatalogList = ({ adverts }) => {
             )}
           </>
         ) : (
-          <div>sdsdfsf</div>
+          <div className={css.nothingBox}>
+            <h1 className={css.nothingTitle}>
+              In response to your request, there are no adverts
+            </h1>
+          </div>
         )}
       </div>
     </>
@@ -102,27 +134,3 @@ const CatalogList = ({ adverts }) => {
 };
 
 export default CatalogList;
-
-CatalogList.propTypes = {
-  adverts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      year: PropTypes.number.isRequired,
-      make: PropTypes.string.isRequired,
-      model: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      accessories: PropTypes.arrayOf(PropTypes.string).isRequired,
-      address: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      engineSize: PropTypes.string.isRequired,
-      fuelConsumption: PropTypes.string.isRequired,
-      functionalities: PropTypes.arrayOf(PropTypes.string).isRequired,
-      img: PropTypes.string.isRequired,
-      rentalCompany: PropTypes.string.isRequired,
-      rentalConditions: PropTypes.string.isRequired,
-      rentalPrice: PropTypes.string.isRequired,
-      mileage: PropTypes.number.isRequired,
-      favorite: PropTypes.bool.isRequired,
-    })
-  ).isRequired,
-};

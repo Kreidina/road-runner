@@ -13,11 +13,12 @@ const initialValues = {
   mileage: { from: "", to: "" },
 };
 
-const Sidebar = ({ onSubmitData }) => {
+const Sidebar = ({ onSubmitData, setNothing }) => {
   const scoresArray = priceSelect();
 
   const onSubmit = (value) => {
     onSubmitData(value);
+    setNothing(false);
     // resetForm();
   };
 
@@ -129,4 +130,5 @@ const Sidebar = ({ onSubmitData }) => {
 export default Sidebar;
 Sidebar.propTypes = {
   onSubmitData: PropTypes.func.isRequired,
+  setNothing: PropTypes.func.isRequired,
 };

@@ -16,12 +16,12 @@ const LearnMore = ({ car }) => {
     description,
     functionalities,
     mileage,
-    rentalConditions,
+    // rentalConditions,
   } = car;
 
-  const parts = rentalConditions.split("/n");
+  // const parts = rentalConditions.split("/n");
 
-  console.log(parts);
+  // console.log(parts);
 
   const location = address.split(",");
   const city = address.split(",")[1];
@@ -100,7 +100,7 @@ const LearnMore = ({ car }) => {
 export default LearnMore;
 LearnMore.propTypes = {
   car: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     make: PropTypes.string.isRequired,
     model: PropTypes.string.isRequired,

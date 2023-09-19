@@ -1,22 +1,17 @@
-import { useEffect, useState } from "react";
-import { fetchCars } from "../servises/apiCars";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import CatalogList from "../components/CatalogList/CatalogList";
+import { allCars } from "../redux/advetrs/operation";
 
 const Favorite = () => {
-  const [adverts, setAdverts] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const cars = fetchCars();
-    cars.then((car) => {
-      setAdverts(car);
-    });
-  }, []);
+    dispatch(allCars());
+  }, [dispatch]);
 
-  const favorite = adverts.filter((advert) => advert.favorite === true);
-
-  return (
-      <CatalogList adverts={favorite} />
-  );
+  return <CatalogList />;
 };
 
 export default Favorite;

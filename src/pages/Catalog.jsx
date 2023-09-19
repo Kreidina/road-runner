@@ -1,21 +1,19 @@
 import { useEffect } from "react";
-import { useState } from "react";
-import { fetchCars } from "../servises/apiCars";
+
 import CatalogList from "../components/CatalogList/CatalogList";
+import { useDispatch } from "react-redux";
+import { allCars } from "../redux/advetrs/operation";
 
 const Catalog = () => {
-  const [adverts, setAdverts] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const cars = fetchCars();
-    cars.then((car) => {
-      setAdverts(car);
-    });
-  }, []);
+    dispatch(allCars());
+  }, [dispatch]);
 
   return (
     <div>
-      <CatalogList adverts={adverts} />
+      <CatalogList />
     </div>
   );
 };

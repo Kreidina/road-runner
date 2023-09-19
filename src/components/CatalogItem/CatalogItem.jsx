@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { FillHeart, Heart } from "../../helpers/icons";
 import ModalContainer from "../ModalContainer/ModalContainer";
 import css from "./CatalogItem.module.css";
 import Button from "../Button";
-import { fetchChangeFavorite } from "../../servises/apiCars";
 import LearnMore from "../LearnMore/LearnMore";
+import { patchFavorite } from "../../redux/advetrs/operation";
 
 const CatalogItem = ({ car }) => {
   const {
@@ -23,6 +24,7 @@ const CatalogItem = ({ car }) => {
     favorite,
   } = car;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const location = address.split(",");
   const city = address.split(",")[1];
@@ -34,8 +36,9 @@ const CatalogItem = ({ car }) => {
   // console.log(rentalPrice);
 
   const changeFavorite = async (car) => {
-    const newValue = JSON.stringify({ favorite: !favorite });
-    await fetchChangeFavorite(car.id, newValue);
+    const body = JSON.stringify({ favorite: !favorite });
+    const id = car.id;
+    dispatch(patchFavorite({ id, body }));
   };
 
   return (
@@ -103,7 +106,7 @@ const CatalogItem = ({ car }) => {
 export default CatalogItem;
 CatalogItem.propTypes = {
   car: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     make: PropTypes.string.isRequired,
     model: PropTypes.string.isRequired,
