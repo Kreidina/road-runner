@@ -49,7 +49,7 @@ const Main = () => {
           <h2 className={css.btnTitle}>
             Choose a comfortable car and enjoy a trip around Ukraine with us.
           </h2>
-          <Link to={"/catalog"} className={css.btn}>
+          <Link to={"/road-runner/catalog"} className={css.btn}>
             Rental car
           </Link>
         </div>

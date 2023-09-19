@@ -6,12 +6,12 @@ import { Phone } from "../../helpers/icons";
 const Header = () => {
   return (
     <div className={css.container}>
-      <Link to={"/"} className={css.logoLink}>
+      <Link to={"/road-runner/"} className={css.logoLink}>
         <LogoRoadRunner />
       </Link>
       <div className={css.nav}>
         <NavLink
-          to={"/catalog"}
+          to={"/road-runner/catalog"}
           className={({ isActive }) =>
             isActive ? `${css.active} ${css.navLink}` : css.navLink
           }
@@ -19,7 +19,7 @@ const Header = () => {
           Catalog
         </NavLink>
         <NavLink
-          to={"/favorites"}
+          to={"/road-runner/favorites"}
           className={({ isActive }) =>
             isActive ? `${css.active} ${css.navLink}` : css.navLink
           }
