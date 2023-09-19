@@ -1,13 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 import css from "./Header.module.css";
-// import { LogoRoadRunner } from "../Logo";
+import { LogoRoadRunner } from "../Logo";
 import { Phone } from "../../helpers/icons";
 
 const Header = () => {
   return (
     <div className={css.container}>
       <Link to={"/"} className={css.logoLink}>
-        {/* <LogoRoadRunner /> */}
+        <LogoRoadRunner />
       </Link>
       <div className={css.nav}>
         <NavLink
