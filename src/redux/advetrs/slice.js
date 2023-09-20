@@ -1,14 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { allCars, patchFavorite } from "./operation";
-import { handelFulfilled, handelPending, handelReject } from "./function";
+
+import {
+  addFavorite,
+  allCars,
+  allFavorites,
+  deleteFavorite,
+} from "./operation";
+import {
+  handelFulfilled,
+  handelPending,
+  handelReject,
+  handelAddFav,
+  handelDelete,
+  handelAllFav,
+} from "./function";
 
 const initialState = {
   adverts: [],
+  favorites: [],
   isLoading: false,
-  error: null,
 };
 
-const arrayThunks = [allCars, patchFavorite];
+const arrayThunks = [allCars, allFavorites, addFavorite, deleteFavorite];
 
 const advertsSlice = createSlice({
   name: "adverts",
@@ -18,7 +31,25 @@ const advertsSlice = createSlice({
       builder
         .addCase(fetch.pending, handelPending)
         .addCase(fetch.rejected, handelReject)
-        .addCase(fetch.fulfilled, handelFulfilled);
+        .addCase(fetch.fulfilled, (state, action) => {
+          switch (fetch) {
+            case allCars:
+              handelFulfilled(state, action);
+              break;
+            case allFavorites:
+              handelAllFav(state, action);
+              break;
+
+            case addFavorite:
+              handelAddFav(state, action);
+              break;
+            case deleteFavorite:
+              handelDelete(state, action);
+              break;
+            default:
+              break;
+          }
+        });
     });
   },
 });

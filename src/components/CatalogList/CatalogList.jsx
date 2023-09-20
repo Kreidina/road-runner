@@ -5,7 +5,7 @@ import CatalogItem from "../CatalogItem/CatalogItem";
 import css from "./CatalogList.module.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Button from "../Button";
-import { selectAdverts } from "../../redux/advetrs/selectors";
+import { selectAdverts, selectFavorite } from "../../redux/advetrs/selectors";
 import { Location, filterArray } from "../../helpers/func";
 
 const initialValues = {
@@ -19,9 +19,21 @@ const CatalogList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [dataValues, setDataValues] = useState(initialValues);
   const [nothing, setNothing] = useState(false);
-  const adverts = useSelector(selectAdverts);
 
   const location = Location();
+
+  const advertsWithOutFav = useSelector(selectAdverts);
+  const favoriteArray = useSelector(selectFavorite);
+  let adverts = [...advertsWithOutFav];
+
+  adverts = adverts.map((obj1) => {
+    const obj2 = favoriteArray.find((obj2) => obj2.idAdverts === obj1.id);
+    if (obj2) {
+      const obj1WithFav = { ...obj1, favorite: true, idFav: obj2.id };
+      return obj1WithFav;
+    }
+    return obj1;
+  });
 
   const handelMore = () => {
     setVisible(visible + 8);
@@ -34,7 +46,6 @@ const CatalogList = () => {
     setVisible(8);
   };
 
-  const favoriteArray = adverts.filter((advert) => advert.favorite === true);
   const funFilterArray = () => {
     if (location === "/road-runner/catalog") {
       const catalog = filterArray(adverts, dataValues);
@@ -87,6 +98,15 @@ const CatalogList = () => {
             </h1>
           </div>
         )}
+        {location === "/road-runner/favorites" &&
+          favoriteArray.length === 0 && (
+            <div className={css.nothingBox}>
+              <h1 className={css.nothingTitle}>
+                You currently do not have any favorite ads. Add ads to favorites
+                to see them here
+              </h1>
+            </div>
+          )}
       </div>
     </>
   );

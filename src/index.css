@@ -12,6 +12,7 @@
   --hover-blue: #0b44cd;
   --accent-color: #3470ff;
   --shadow-hover: 7px 13px 14px rgba(116, 177, 232, 0.24);
+  --shadow-input-hover: 7px 9px 9px rgba(73, 96, 117, 0.1);
 }
 
 *,

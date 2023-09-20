@@ -1,6 +1,6 @@
 import * as yup from "yup";
-import { priceSelect } from "./helpers/func";
-import { brands } from "./helpers/brands";
+import { priceSelect } from "./func";
+import { brands } from "./brands";
 
 const select = priceSelect();
 

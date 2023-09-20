@@ -5,6 +5,7 @@ const instance = axios.create({
   baseURL: "https://650a25aef6553137159c75ef.mockapi.io",
   headers: { "content-type": "application/json" },
 });
+
 export const allCars = createAsyncThunk(
   "cars/fetchAll",
   async (_, thunkApi) => {
@@ -18,11 +19,36 @@ export const allCars = createAsyncThunk(
   }
 );
 
-export const patchFavorite = createAsyncThunk(
-  "favorite/patch",
-  async ({ id, body }, thunkApi) => {
+export const allFavorites = createAsyncThunk(
+  "favorites/fetchAll",
+  async (_, thunkApi) => {
     try {
-      const { data } = await instance.patch(`/adverts/${id}`, body);
+      const { data } = await instance.get("/favorites");
+      return data;
+    } catch (e) {
+      console.log(e.message);
+      return thunkApi.rejectWithValue(e.message);
+    }
+  }
+);
+export const addFavorite = createAsyncThunk(
+  "favorite/addFavorives",
+  async (body, thunkApi) => {
+    try {
+      const { data } = await instance.post("/favorites", body);
+      return data;
+    } catch (e) {
+      console.log(e.message);
+      return thunkApi.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const deleteFavorite = createAsyncThunk(
+  "favorite/deleteFavorives",
+  async (id, thunkApi) => {
+    try {
+      const { data } = await instance.delete(`/favorites/${id}`);
       return data;
     } catch (e) {
       console.log(e.message);

@@ -21,4 +21,5 @@ export const brands = [
   "Chrysler",
   "Kia",
   "Land",
+  "Renault",
 ];

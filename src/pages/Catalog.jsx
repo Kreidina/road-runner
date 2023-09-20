@@ -1,8 +1,8 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import CatalogList from "../components/CatalogList/CatalogList";
-import { useDispatch } from "react-redux";
-import { allCars } from "../redux/advetrs/operation";
+import { allCars, allFavorites } from "../redux/advetrs/operation";
 
 const Catalog = () => {
   const dispatch = useDispatch();
@@ -11,11 +11,11 @@ const Catalog = () => {
     dispatch(allCars());
   }, [dispatch]);
 
-  return (
-    <div>
-      <CatalogList />
-    </div>
-  );
+  useEffect(() => {
+    dispatch(allFavorites());
+  }, [dispatch]);
+
+  return <CatalogList />;
 };
 
 export default Catalog;

@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
+
 import css from "./LearnMore.module.css";
+
 const LearnMore = ({ car }) => {
   const {
     id,
@@ -25,8 +27,11 @@ const LearnMore = ({ car }) => {
   const location = address.split(",");
   const city = address.split(",")[1];
   const country = location[2];
+
   const mile = mileage.toLocaleString("en-US");
+
   const price = rentalPrice.replace("$", "");
+
   return (
     <div>
       <img src={img} alt={make} className={css.img} />
@@ -127,6 +132,5 @@ LearnMore.propTypes = {
     rentalConditions: PropTypes.string.isRequired,
     rentalPrice: PropTypes.string.isRequired,
     mileage: PropTypes.number.isRequired,
-    favorite: PropTypes.bool.isRequired,
   }).isRequired,
 };

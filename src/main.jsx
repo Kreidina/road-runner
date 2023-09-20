@@ -5,16 +5,16 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
+import { Provider } from "react-redux";
 
+import { store } from "./redux/store.js";
 import App from "./App.jsx";
 import "./index.css";
 
-import Layout from "./components/Layout/Layout";
+import Layout from "./components/Layout.jsx";
 import Home from "./pages/Home.jsx";
 import Catalog from "./pages/Catalog.jsx";
 import Favorite from "./pages/Favorite.jsx";
-import { Provider } from "react-redux";
-import { store } from "./redux/store.js";
 
 const router = createBrowserRouter([
   {

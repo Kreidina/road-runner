@@ -7,7 +7,8 @@ import ModalContainer from "../ModalContainer/ModalContainer";
 import css from "./CatalogItem.module.css";
 import Button from "../Button";
 import LearnMore from "../LearnMore/LearnMore";
-import { patchFavorite } from "../../redux/advetrs/operation";
+import { addFavorite, deleteFavorite } from "../../redux/advetrs/operation";
+import { Location } from "../../helpers/func";
 
 const CatalogItem = ({ car }) => {
   const {
@@ -24,7 +25,9 @@ const CatalogItem = ({ car }) => {
     favorite,
   } = car;
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const dispatch = useDispatch();
+  const pathLocation = Location();
 
   const location = address.split(",");
   const city = address.split(",")[1];
@@ -35,12 +38,23 @@ const CatalogItem = ({ car }) => {
   };
 
   const changeFavorite = async (car) => {
-    const body = JSON.stringify({ favorite: !favorite });
-    const id = car.id;
-    dispatch(patchFavorite({ id, body }));
+    const { id, idFav, ...carWithOutId } = car;
+    const body = JSON.stringify({
+      idAdverts: id,
+      ...carWithOutId,
+      favorite: true,
+    });
+    if (!car.favorite) {
+      dispatch(addFavorite(body));
+    }
+    if (car.favorite) {
+      const deleteId = pathLocation === "/road-runner/favorites" ? id : idFav;
+      dispatch(deleteFavorite(deleteId));
+    }
   };
+
   const shouldModel = make.length + model.length > 18;
-  // console.log(make.length + model.length > 18);
+
   return (
     <>
       <li className={css.itemContainer}>
@@ -127,6 +141,7 @@ CatalogItem.propTypes = {
     rentalConditions: PropTypes.string.isRequired,
     rentalPrice: PropTypes.string.isRequired,
     mileage: PropTypes.number.isRequired,
-    favorite: PropTypes.bool.isRequired,
+    favorite: PropTypes.bool,
+    idFav: PropTypes.string,
   }).isRequired,
 };
