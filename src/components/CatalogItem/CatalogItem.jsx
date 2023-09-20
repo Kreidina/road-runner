@@ -33,14 +33,14 @@ const CatalogItem = ({ car }) => {
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-  // console.log(rentalPrice);
 
   const changeFavorite = async (car) => {
     const body = JSON.stringify({ favorite: !favorite });
     const id = car.id;
     dispatch(patchFavorite({ id, body }));
   };
-
+  const shouldModel = make.length + model.length > 18;
+  // console.log(make.length + model.length > 18);
   return (
     <>
       <li className={css.itemContainer}>
@@ -61,7 +61,8 @@ const CatalogItem = ({ car }) => {
         <div className={css.infoBox}>
           <div className={css.titleBox}>
             <p className={css.title}>
-              {make} <span className={css.span}>{model}</span>, {year}
+              {make} {!shouldModel && <span className={css.span}>{model}</span>}
+              , {year}
             </p>
             <p className={css.price}>{rentalPrice}</p>
           </div>
@@ -87,7 +88,11 @@ const CatalogItem = ({ car }) => {
             <li className={css.item}>
               {id} <span className={css.line}></span>
             </li>
-            <li className={css.item}>{accessories[0]}</li>
+            <li className={css.item}>
+              {accessories.find((acc) => {
+                return acc.length <= 28;
+              })}
+            </li>
           </ul>
         </div>
         <Button type="button" onClick={toggleModal} className={css.btn}>

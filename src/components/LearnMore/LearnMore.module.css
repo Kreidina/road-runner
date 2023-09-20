@@ -4,7 +4,7 @@
   border-radius: 14px;
 }
 .infoBox {
-  width: 300px;
+  width: 400px;
   margin-top: 14px;
 }
 .title {
@@ -44,5 +44,44 @@
 }
 .accessoriesList {
   display: flex;
+  align-items: flex-start;
   flex-wrap: wrap;
+}
+.rentalContainer {
+  margin-bottom: 24px;
+}
+.rentalList {
+  display: flex;
+  flex-wrap: wrap;
+}
+.rentalItem {
+  padding: 7px 14px;
+  border-radius: 35px;
+  background: #f9f9f9;
+  font-size: 12px;
+  line-height: 18px;
+  margin-bottom: 8px;
+  margin-right: 8px;
+}
+.rentalLink {
+  color: var(--white-color);
+
+  font-weight: 600;
+  line-height: 20px;
+  border-radius: 12px;
+  background: var(--accent-color);
+
+  padding: 12px 50px;
+  margin-top: 24px;
+  width: 168px;
+}
+.text {
+  font-weight: 500;
+  line-height: 20px;
+
+  margin: 24px 0 8px;
+}
+
+.accent {
+  color: var(--accent-color);
 }

@@ -16,16 +16,17 @@ const LearnMore = ({ car }) => {
     description,
     functionalities,
     mileage,
-    // rentalConditions,
+    rentalConditions,
   } = car;
 
-  // const parts = rentalConditions.split("/n");
-
-  // console.log(parts);
+  const parts = rentalConditions.split("\n");
+  const part = parts[0].split(":");
 
   const location = address.split(",");
   const city = address.split(",")[1];
   const country = location[2];
+  const mile = mileage.toLocaleString("en-US");
+  const price = rentalPrice.replace("$", "");
   return (
     <div>
       <img src={img} alt={make} className={css.img} />
@@ -63,8 +64,10 @@ const LearnMore = ({ car }) => {
         </ul>
       </div>
       <p className={css.description}>{description}</p>
-      <div>
-        <p>Accessories and functionalities:</p>
+      <div className={css.accesBox}>
+        <p className={`${css.text} ${css.accesText}`}>
+          Accessories and functionalities:
+        </p>
         <ul className={css.accessoriesList}>
           {accessories.map((item, index) => (
             <li key={item} className={css.item}>
@@ -82,17 +85,25 @@ const LearnMore = ({ car }) => {
           ))}
         </ul>
       </div>
-      <div>
-        <p>Rental Conditions:</p>
-        <ul>
-          <li>Minimum age:</li>
-          <li>Valid driver’s license</li>
-          <li>Security deposite required</li>
-          <li>Mileage:{mileage}</li>
-          <li>Price:{rentalPrice}</li>
+      <div className={css.rentalContainer}>
+        <p className={`${css.text} ${css.rentalText}`}>Rental Conditions:</p>
+        <ul className={css.rentalList}>
+          <li className={css.rentalItem}>
+            Minimum age: <span className={css.accent}>{part[1]}</span>
+          </li>
+          <li className={css.rentalItem}>{parts[1]}</li>
+          <li className={css.rentalItem}>{parts[2]}</li>
+          <li className={css.rentalItem}>
+            Mileage: <span className={css.accent}>{mile}</span>
+          </li>
+          <li className={css.rentalItem}>
+            Price: <span className={css.accent}>{price}$</span>
+          </li>
         </ul>
       </div>
-      <a href="tel:+380730000000">Rental car</a>
+      <a href="tel:+380730000000" className={css.rentalLink}>
+        Rental car
+      </a>
     </div>
   );
 };

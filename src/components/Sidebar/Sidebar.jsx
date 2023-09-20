@@ -21,6 +21,14 @@ const Sidebar = ({ onSubmitData, setNothing }) => {
     setNothing(false);
     // resetForm();
   };
+  // const handleInputChange = (e) => {
+  //   const input = e.target;
+  //   let value = input.value.replace(/\D/g, ""); // Видаляємо всі символи, окрім цифр
+  //   if (value) {
+  //     value = Number(value).toLocaleString("en-US"); // Форматуємо число з комою
+  //   }
+  //   input.value = value;
+  // };
 
   return (
     <div className={css.container}>
@@ -43,7 +51,6 @@ const Sidebar = ({ onSubmitData, setNothing }) => {
                     as="select"
                     name="selectBrand"
                     className={`${css.select} ${css.selectBrand}`}
-                    autocomlete="off"
                     onFocus={() => setFieldTouched({ selectBrand: true })}
                   >
                     <option value="">Enter the text</option>
@@ -73,7 +80,6 @@ const Sidebar = ({ onSubmitData, setNothing }) => {
                     name="selectPrice"
                     id="price"
                     className={`${css.select} ${css.selectPrice}`}
-                    autocomlete="off"
                   >
                     <option value=""> $</option>
                     {scoresArray.map((score, index) => (
@@ -106,11 +112,13 @@ const Sidebar = ({ onSubmitData, setNothing }) => {
                       To
                     </label>
                     <Field
-                      type="number"
+                      type="numder"
                       id="To"
                       name="mileage.to"
                       className={`${css.select} ${css.input} ${css.inputTo}`}
                       autocomlete="off"
+                      // onChange={handleInputChange}
+                      // value={values.mileage.to}
                     />
                   </div>
                 </div>

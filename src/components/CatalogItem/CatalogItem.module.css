@@ -1,5 +1,6 @@
 .itemContainer {
   width: 274px;
+  height: 426px;
 }
 .imgBox {
   position: relative;
@@ -22,6 +23,10 @@
 }
 .infoBox {
   margin: 14px 0 28px;
+  height: 72px;
+}
+.title {
+  width: 240px;
 }
 .titleBox {
   display: flex;
